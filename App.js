@@ -1,27 +1,26 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
-export default function App() {
+import { useFonts, IBMPlexMono_400Regular, IBMPlexMono_600SemiBold } from '@expo-google-fonts/ibm-plex-mono';
+
+import Home from './src/pages/Home';
+
+export default function App() { 
+  
+  let [fontsLoaded, fontError] = useFonts({
+    IBMPlexMono_400Regular, IBMPlexMono_600SemiBold
+  });
+  
+  if (!fontsLoaded && !fontError) {
+    return null;
+  }
+
   return (
-    <> 
-    <View style={styles.container}>
+    <>
       <View>
-        <StatusBar style="auto" translucent={true} />
+        <StatusBar style="light" backgroundColor='#000' translucent={true} />
+        <Home />
       </View>
-      <View>
-        <Text style={styles.heading}>Expenses Minimal</Text>  
-        <Text style={styles.totPrice}>R$ 2.000,56</Text>
-      </View>
-    </View>
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
